@@ -1,0 +1,43 @@
+<section class="sct-color-1 slice">
+  <div class="container-fluid masonry-container">
+    <div class="row">
+      <div class="col-md-8 col-sm-offset-2">
+        <div class="masonry-wrapper-cols">
+          <div class="masonry-gutter"></div>
+          <% @post_images.each do |post_image| %>
+          <div class="masonry-block">
+            <div class="block block-image v1">
+
+              <div class="block-image">
+                <div class="view view-first">
+                  <%= link_to post_image_path(post_image.id) do %>
+                  <%= attachment_image_tag post_image, :image %>
+                  <% end %>
+
+                </div>
+              </div>
+
+              <div class="block-content">
+                <%= image_tag('sample-author1.jpg', class: "img-circle pull-left profile-thumb") %>
+                <h3 class="block-title">
+                </h3>
+                <p><%= post_image.caption %></p>
+                <ul class="inline-meta">
+                  <li>By
+                    <%= post_image.user.name %>
+                  </li>
+                  <li>
+                    <%= link_to "#{post_image.post_comments.count}コメント",post_image_path(post_image.id) %>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+

@@ -1,0 +1,84 @@
+<section class="sct-color-1 slice">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 post_images_container">
+        <div class="post-item">
+
+          <div class="post-meta-top">
+            <div class="post-image">
+              <%= attachment_image_tag @post_image, :image %>
+            </div>
+          </div>
+
+          <div class="post-content">
+            <h2 class="post-title"><%= @post_image.shop_name %></h2>
+            <ul class="meta-info-cells v4 float-wrapper">
+              <li>
+                <i class="fa fa-user"></i>By<a herf="#">
+                <%= @post_image.user.name %></a>
+              </li>
+              <li>
+                <i class="fa fa-calendar"></i><%= @post_image.created_at.strftime('%Y/%m/%d') %>
+              </li>
+              <li>
+                <i class="fa fa-heart"></i>
+                <a href="#">202 いいね</a>
+              </li>
+              <li>
+                <i class="fa fa-comment"></i>
+                <a href="#comments"><%= @post_image.post_comments.count %></a>
+              </li>
+            </ul>
+            <div class="post-content-inner mt-20">
+              <p><%= @post_image.caption %></p>
+            </div>
+          </div>
+
+          <div class="comment-list bt style-2" id="comments">
+            <div class="float-wrapper">
+              <h2 class="comment-count"><%= @post_image.post_comments.count %>件コメント</h2>
+            </div>
+            <ol>
+              <% @post_image.post_comments.each do |post_comment| %>
+              <li class="comment">
+                <div class="comment-body bb">
+                  <div class="comment-avatar">
+                    <div class="avatar">
+                      <%= image_tag('sample-author1.jpg', style: "width: 60px; height: 60px;") %>
+                    </div>
+                  </div>
+                  <div class="comment-text">
+                    <div class="comment-author clearfix">
+                      <a href="#" class="link-author"><%= post_comment.user.name %></a>
+                      <span class="comment-meta">
+                        <span class="comment-date"><%= post_comment.created_at.strftime('%Y/%m/%d') %></span>
+                      </span>
+                    </div>
+                    <div class="comment-entry"><%= post_comment.comment %></div>
+                  </div>
+                </div>
+              </li>
+              <% end %>
+            </ol>
+          </div>
+          <hr>
+
+          <!-- Add comment section -->
+          <div class="section-title-wrapper style-1 v1 mt-30" id="divAddComment">
+            <h3 class="section-title left">
+              <span>コメント</span>
+            </h3>
+          </div>
+          <%= form_for [@post_image, @post_comment] do |f| %>
+          <div class="row">
+            <div class="col-sm-12">
+              <%= f.text_area :comment, rows:'5',class: "form_control",placeholder:"コメントをここに" %>
+            </div>
+        </div>
+        <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,89 @@
+<section class="slice sct-color-1">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 post_image_form">
+            <div class="section-title-wrapper style-1 v1">
+              <h3 class="section-title section-title-sm left">
+                <span>画像投稿フォーム</span>
+              </h3>
+            </div>
+
+            <!-- <form> -->
+<%= form_for(@post_image, url: post_images_path) do |f| %>
+  <% if @post_image.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @post_image.errors.count %>件のエラーが発生しました。</h2>
+      <ul>
+      <% @post_image.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-sm-12">
+      <%= f.attachment_field :image %>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group has-icon">
+        <label class="control-label sr-only">ショップ名</label>
+        <%= f.text_field :shop_name, class:"form-control", placeholder:"ショップ名" %>
+        <span class="fa fa-building form-control-icon" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="col-sm-6">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <%= f.text_area :caption, class:"form-control", rows:"3", placeholder:"コメントここに" %>
+    </div>
+  </div>
+  <hr>
+  <%= f.submit "送信", class:"btn btn-lg btn-block btn-base-1 mt-20" %>
+<% end %>
+<!-- </form> -->
+
+            <!-- <form class="mt-20">
+              <div class="row">
+                <div class="col-sm-12">
+                  <input type="file">
+                </div>
+              </div><br>
+              
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group has-icon">
+                    <label class="control-label sr-only">ショップ名</label>
+                    <input type="text" class="form-control" id="ショップ名" placeholder="ショップ名">
+                    <span class="fa fa-building form-control-icon" aria-hidden="true"></span>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <textarea class="form-control" rows="3" placeholder="コメントここに"></textarea>
+                </div>
+              </div>
+
+              <hr>
+
+              
+
+              <button type="submit" class="btn btn-lg btn-block btn-base-1 mt-20">送信</button>
+            </form> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

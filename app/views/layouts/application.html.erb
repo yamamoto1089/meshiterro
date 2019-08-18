@@ -1,15 +1,93 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Meshiterro</title>
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meshiterro</title>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,600,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+  </head> 
 
   <body>
+
+    <div class="header" id="header">
+      <nav class="navbar navbar-main navbar-shadow" role="navigation" id="slide-nav">
+        <div class="container relative">
+          <div class="navbar-header">
+            <a class="navbar-logo" href="/">
+              <%= image_tag('logo.png') %>
+            </a>
+   
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="slidemenu">
+            <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
+              <% if user_signed_in? %>
+              <li class="">
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+              </li>
+              <li class="">
+                <%= link_to '投稿フォーム', new_post_image_path %>
+              </li>
+              <li class="">
+                <!-- ↓以下のコードは、5章で正しいroutingに書き直します。 -->
+                <%= link_to 'マイページ', "#" %>
+              </li>
+              <% else %>
+              <li class="">
+                <%= link_to "新規登録", new_user_registration_path %>
+              </li>
+              <li class="">
+                <%= link_to "ログイン", new_user_session_path %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  
     <%= yield %>
+
+   <footer class="footer style-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="col">
+              <br>
+              <p class="no-margin" style="font-size: 11px;">
+              <br>
+              善良な市民同士で無差別に食欲を煽るSNS
+          </p>
+              <%= image_tag('logo-white.png') %>
+              
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="col">
+              <h4>Link</h4>
+              <ul>
+                <li>
+                  <a href="" title="About">会社概要</a>
+                </li>
+                <li>
+                  <a href="" title="License informations">プライバシーポリシー</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
   </body>
 </html>
