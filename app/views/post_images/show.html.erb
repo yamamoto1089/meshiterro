@@ -20,13 +20,30 @@
               <li>
                 <i class="fa fa-calendar"></i><%= @post_image.created_at.strftime('%Y/%m/%d') %>
               </li>
+              <!-- いいね機能 -->
+              <% if @post_image.favorited_by?(current_user) %>
               <li>
-                <i class="fa fa-heart"></i>
-                <a href="#">202 いいね</a>
+                <%= link_to post_image_favorites_path(@post_image),method: :delete do %>
+                <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+                <%= @post_image.favorites.count %> いいね
+                <% end %>
               </li>
+              <% else %>
+              <li>
+                <%= link_to post_image_favorites_path(@post_image),method: :post do %>
+                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                <%= @post_image.favorites.count %> いいね
+                <% end %>
+              </li>
+              <% end %>
               <li>
                 <i class="fa fa-comment"></i>
                 <a href="#comments"><%= @post_image.post_comments.count %></a>
+              </li>
+              <li>
+                <% if @post_image.user == current_user %>
+                <%= link_to"削除",post_image_path(@post_image),mathod: :delete %>
+                <% end %>
               </li>
             </ul>
             <div class="post-content-inner mt-20">
